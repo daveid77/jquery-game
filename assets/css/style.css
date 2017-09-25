@@ -24,7 +24,7 @@ h1, h2, h3, h4 {
 }
 h1 {
   font-family: 'planet_of_the_apes', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  font-size: 36px;
+  font-size: 24px;
   line-height: 1;
   color: #fff;
   margin: 10px;
@@ -37,10 +37,10 @@ h2 {
   padding-bottom: 26px;
 }
 h3 {
-  margin-bottom: 5px;
-  padding: 10px 10px 10px 0;
+  margin-bottom: 0;
+  padding: 10px 10px 0 0;
   font-size: 22px;
-  line-height: 1.5;
+  line-height: 1.2;
   letter-spacing: .12em;
 }
 h4 {
@@ -93,13 +93,13 @@ header img {
 }
 .content {
   /*width: 56%;*/
-  width: 594px;
+  width: 500px;
   min-height: 300px;
   float: left;
 }
 .sidebar {
   /*width: 26%;*/
-  width: 214px;
+  width: 300px;
   float: right;
 }
 .maininner {
@@ -131,6 +131,84 @@ footer .copyright a {
   text-decoration: none;
 }
 
+/* GAME CONTENT */
+.wrapper {
+  width: 100%;
+  margin: 0 0 10px 0;
+  float: left;
+}
+.sidebar, 
+#enemies, 
+#fight,
+#defender {
+  display: none;
+}
+#characters .character {
+  color: #000;
+  background: #fff;
+}
+#enemies .character {
+  color: #fff;
+  background: #000;
+}
+#defender .character {
+  color: #fff;
+  background: #ff0000;
+}
+.character {
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  float: left;
+  cursor: pointer;
+}
+.character.chosen,
+.character.defender {
+  cursor: default;
+}
+.character img {
+  width: 100%;
+}
+button {
+  display: inline-block;
+  margin: 10px 0 0 0;
+  padding: 14px 30px;
+  font-size: 18px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  background: #dd1818;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+button:hover {
+  background: #ec1a1a;
+}
+button.disabled:hover {
+  background: #dd1818;
+}
+button:active {
+  background: #c01616;
+}
+button:focus {
+  outline:0;
+}
+.battle-text {
+  width: 100%;
+  padding: 5px 0;
+  color: #000;
+  clear: both;
+}
+button#restart-button {
+  display: none;
+}
+button.disabled {
+  opacity: 0.65; 
+  cursor: not-allowed;
+}
+
+
 
 /* Width at 980px and below */
 @media screen and (max-width: 980px) {
@@ -149,6 +227,12 @@ footer .copyright a {
   .maininner {
     margin: 20px 0;
     padding: 28px;
+  }
+  h1 {
+    margin-bottom: 5px;
+    padding: 5px;
+    line-height: 1.5;
+    text-align: center;
   }
 }
 
@@ -169,6 +253,7 @@ footer .copyright a {
   .sidebar.maininner {
     width: 80%;
     margin: 20px auto;
+    overflow: auto;
     float: none;
   }
   .maininner {

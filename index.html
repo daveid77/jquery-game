@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
+  <!-- javascript called at page bottom -->
 </head>
 <body>
 
@@ -17,7 +17,7 @@
 
     <header>
       <div class="mainwrapper">
-        <h1>Planet of the Apes RPG</h1>
+        <h1>Battle for the Planet of the Apes</h1>
       </div>
     </header>
 
@@ -26,34 +26,30 @@
 
         <div class="sidebar maininner">
 
-          <h3>sidebar</h3>
+          <div id="fight" class="wrapper">
+            <h3>Fight</h3>
+            <button id="attack-button">Attack</button>
+          </div>
 
-          <p>sidebar content</p>
+          <div id="defender" class="wrapper">
+            <h3>Current Defender</h3>
+          </div>
 
-          <p>sidebar content</p>
+          <div id="battle-text1" class="battle-text"></div>
+          <div id="battle-text2" class="battle-text"></div>
 
-          <p>sidebar content</p>
-
-          <p>sidebar content</p>
-
-          <p>sidebar content</p>
+          <button id="restart-button">Restart</button>
 
         </div>
 
         <div class="content maininner">
 
-          <h3>main</h3>
+          <div id="characters" class="wrapper">
+            <h3>Choose a great ape as your character</h3>
+          </div>
 
-          <p>main content</p>
-
-          <p>main content</p>
-
-          <p>main content</p>
-
-          <p>main content</p>
-
-          <p>main content</p>
-
+          <div id="enemies" class="wrapper">
+            <h3>Choose an enemy to attack</h3>
           </div>
 
         </div>
@@ -66,14 +62,13 @@
   <footer>
     <div class="mainwrapper">
       <div class="copyright">
-        <p><a href="https://dbmarshall.github.io/week-4-game/blob/master/README.md" title="README file with license information">&copy; Copyright 2017 David Morse</a></p>
+        <p><a href="https://github.com/dbmarshall/week-4-game/blob/master/README.md" title="README file with license information">&copy; Copyright 2017 David Morse</a></p>
       </div>
     </div>
   </footer>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="assets/javascript/game.js"></script>
 
 </body>
-
 </html>
