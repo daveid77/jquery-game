@@ -2,14 +2,13 @@
  jQuery RPG Game
  **/
 
-/*@font-face {
-    font-family: 'the_fresh_prince';
-    src: url('../fonts/the_fresh_prince/thefreshprince_abgespeckt.woff2') format('woff2'),
-         url('../fonts/the_fresh_prince/thefreshprince_abgespeckt.woff') format('woff');
+@font-face {
+    font-family: 'planet_of_the_apes';
+    src: url('../fonts/planetoftheapes-webfont.woff') format('woff2'),
+         url('../fonts/planetoftheapes-webfont.woff2') format('woff');
     font-weight: normal;
     font-style: normal;
-
-}*/
+}
 
 html, body {
   height: 100%;
@@ -24,7 +23,8 @@ h1, h2, h3, h4 {
   letter-spacing: .08em;
 }
 h1 {
-  font-size: 42px;
+  font-family: 'planet_of_the_apes', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 36px;
   line-height: 1;
   color: #fff;
   margin: 10px;
@@ -84,6 +84,8 @@ header img {
   height: 100%;
   padding-bottom: 45px;
   overflow: auto;
+  background: #c6977a url('../images//village.jpg');
+  background-size: cover;
 }
 .mainwrapper {
   width: 960px;
@@ -105,6 +107,7 @@ header img {
   margin: 20px 0;
   padding: 28px;
   background-color: #fff;
+  background: rgba(255,255,255,.7);
   border: 1px solid #ddd;
   border-radius: 25px;
 }
