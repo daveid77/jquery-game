@@ -173,6 +173,7 @@ footer .copyright a {
   cursor: pointer;
 }
 .character.chosen,
+.character.enemy.inactive,
 .character.defender,
 .character.vanquished {
   cursor: default;

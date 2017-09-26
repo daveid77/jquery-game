@@ -6,10 +6,12 @@ Week Two Homework Part 2: [jQuery Assignment](http://ucb.bootcampcontent.com/UCB
 
 ## Misc Notes
 
-* Tried Object-Oriented Javascript in homework for the first time.  Syntax is correct, I believe, but organization may not be ideal and feedback appreciated.  
-* UI enhancements beyond [demo game](http://ucb.bootcampcontent.com/UCB-Coding-Bootcamp/09-11-2017-UCB-Class-Repository-FSF-FT/raw/master/02-week/homework/part-2/homework_demos/starwars_demo.mp4):
-  * Vanquished Opponents grouping added for characters. 
-  * 
+* Tried Object-Oriented Javascript in homework for the first time.  Syntax is correct, I believe, but organization of variables and functions may not be ideal.  Feedback appreciated.  
+* Among the UI enhancements beyond [demo game](http://ucb.bootcampcontent.com/UCB-Coding-Bootcamp/09-11-2017-UCB-Class-Repository-FSF-FT/raw/master/02-week/homework/part-2/homework_demos/starwars_demo.mp4):
+  * Vanquished Opponents grouping added for defeated characters. 
+  * Character section header text updates to match context. 
+  * Cursor matches clickability or lack thereof for characters at various stages.
+  * Used red as theme for "exciting" fighting area.
 
 ## Author
 

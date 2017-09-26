@@ -6,14 +6,11 @@ $(document).ready(function() {
 
   // VARIABLES
   var myHealth;
+  var defenderPower;
   var defenderHealth; 
-  var myPower = 8;
-  var defenderPower = 15;
+  var myPower = 6;
   var fightMode = 0;
   var finalFight = 0;
-
-  // var characterWrapper = '<div class="character"></div>';
-  // var characterInner = '<div class="name">name</div><img><div class="health-points">health points</div>';
 
   // MAIN GAME OBJECT 
   var rpg = {
@@ -21,11 +18,12 @@ $(document).ready(function() {
       names: ['Cornelius', 'Dr. Zaius', 'Gen. Ursus', 'Nova'],
       namesshort: ['cornelius', 'drzaius', 'generalursus', 'nova'],
       healthpoints: [150, 130, 170, 110],
-      //defenderPower: [25, 10, 5, 15]
+      defenderPower: [25, 10, 20, 15]
     },
     initialize: function() {
       for (i = 0; i < rpg.characters.names.length; i++) {
         var characterBox = $('<div>');
+        $(characterBox).attr('data-characterpower', rpg.characters.defenderPower[i]);
         $(characterBox).attr('data-charactername', rpg.characters.namesshort[i]);
         $(characterBox).addClass('character unselected');
         $(characterBox).append('<div class="name"></div>');
@@ -75,6 +73,9 @@ $(document).ready(function() {
       $('#battle-text2').text('');
       defenderData = $(this).attr('data-charactername');
       defenderName = $(this).children('.name').text();
+      defenderPower = $(this).attr('data-characterpower');
+      defenderPowerNum = parseInt(defenderPower);
+        console.log(defenderPowerNum);
       defenderHealth = $(this).children('.health').text();
       defenderHealthNum = parseInt(defenderHealth);
       myHealth = $('.chosen').children('.health').text();
@@ -91,6 +92,7 @@ $(document).ready(function() {
         // set flag for last defender
         finalFight = 1;
       }
+      $('#enemies .character').addClass('inactive');
       $('#defender').append(this);
       $('#attack-button').removeClass('disabled');
       $('.sidebar, #fight, #defender').show('slow');
@@ -102,7 +104,7 @@ $(document).ready(function() {
   $('#attack-button').on('click', function() {
     if (fightMode === 1) {
       $('#battle-text1').text('You attacked ' + defenderName + ' for ' + myPower + ' damage.');
-      $('#battle-text2').text(defenderName + ' attacked you back for ' + defenderPower + ' damage.');
+      $('#battle-text2').text(defenderName + ' attacked you back for ' + defenderPowerNum + ' damage.');
       defenderHealth -= myPower;
       // line below works but data attribute combined with class more complicated
       // $('.character[data-charactername="' + defenderData + '"]').children('.health').text(defenderHealth);
@@ -117,6 +119,7 @@ $(document).ready(function() {
           $('#battle-text1').text('You have defeated ' + defenderName + '. You can chose to fight another enemy.');
         }
         // do after every fight
+        $('#enemies .character').removeClass('inactive');
         $('.defender').children('.health').text('0');
         $('#battle-text2').text('');
         $('#attack-button').addClass('disabled');
@@ -130,10 +133,11 @@ $(document).ready(function() {
       } else {
         $('.defender').children('.health').text(defenderHealth);
       }
-      myHealthNum -= defenderPower;
+      myHealthNum -= defenderPowerNum;
       if (myHealthNum <= 0) {
         $('.chosen').children('.health').text('0');
         $('#battle-text1').html('<div id="game-message">You have been defeated.<br>Game over.</div>');
+        $('#enemies').children('h3').text('Enemies Never Fought');
         $('#battle-text2').text('');
         $('#attack-button').addClass('disabled');
         $('#restart-button').show('fast');
