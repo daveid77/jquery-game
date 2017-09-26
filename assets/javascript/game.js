@@ -17,8 +17,8 @@ $(document).ready(function() {
     characters: {
       names: ['Cornelius', 'Dr. Zaius', 'Gen. Ursus', 'Nova'],
       namesshort: ['cornelius', 'drzaius', 'generalursus', 'nova'],
-      healthpoints: [150, 130, 170, 110],
-      defenderPower: [25, 10, 20, 15]
+      healthpoints: [150, 130, 170, 120],
+      defenderPower: [15, 5, 20, 15]
     },
     initialize: function() {
       for (i = 0; i < rpg.characters.names.length; i++) {
@@ -39,7 +39,7 @@ $(document).ready(function() {
       $('#characters h3').text('Choose a Great Ape as Your Character');
       $('#characters, #enemies, #vanquished, #defender').children('div').remove();
       $('.sidebar, #enemies, #vanquished, #fight, #defender, #restart-button').hide();
-      myPower = 8;
+      myPower = 6;
       fightMode = 0;
       finalFight = 0;
       rpg.initialize();
@@ -65,17 +65,12 @@ $(document).ready(function() {
   // CHOOSING AN ENEMY FROM REMAINING
   $('#enemies').on('click', '.enemy', function() {
     if (fightMode !== 1) {
-      // if ($('#defender .character')) {
-      //     console.log('#defender .character');
-      // //$('#defender .character').remove();
-      // }
       $('#battle-text1').text('');
       $('#battle-text2').text('');
       defenderData = $(this).attr('data-charactername');
       defenderName = $(this).children('.name').text();
       defenderPower = $(this).attr('data-characterpower');
       defenderPowerNum = parseInt(defenderPower);
-        console.log(defenderPowerNum);
       defenderHealth = $(this).children('.health').text();
       defenderHealthNum = parseInt(defenderHealth);
       myHealth = $('.chosen').children('.health').text();
