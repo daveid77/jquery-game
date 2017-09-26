@@ -16,10 +16,12 @@ html, body {
 body {
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 18px;
-  color: #777;
+  line-height: 1.3;
+  color: #000;
 }
 h1, h2, h3, h4 {
-  color: #000;
+  /*color: #777;*/
+  line-height: 1;
   letter-spacing: .08em;
 }
 h1 {
@@ -139,9 +141,13 @@ footer .copyright a {
 }
 .sidebar, 
 #enemies, 
+#vanquished, 
 #fight,
 #defender {
   display: none;
+}
+#defender {
+  min-height: 210px;
 }
 #characters .character {
   color: #000;
@@ -155,6 +161,10 @@ footer .copyright a {
   color: #fff;
   background: #ff0000;
 }
+#vanquished .character {
+  color: #fff;
+  background: #969696;
+}
 .character {
   width: 100px;
   margin: 10px;
@@ -163,7 +173,8 @@ footer .copyright a {
   cursor: pointer;
 }
 .character.chosen,
-.character.defender {
+.character.defender,
+.character.vanquished {
   cursor: default;
 }
 .character img {
@@ -200,6 +211,10 @@ button:focus {
   color: #000;
   clear: both;
 }
+#battle-text2 {
+  /*line-height: 1.1;
+  font-weight: bol*/d;
+}
 button#restart-button {
   display: none;
 }
@@ -207,7 +222,10 @@ button.disabled {
   opacity: 0.65; 
   cursor: not-allowed;
 }
-
+#game-message {
+  color: #c01616;
+  font-weight: bold;
+}
 
 
 /* Width at 980px and below */

@@ -8,8 +8,9 @@ $(document).ready(function() {
   var myHealth;
   var defenderHealth; 
   var myPower = 8;
-  var defenderPower = 25;
-  var fightMode;
+  var defenderPower = 15;
+  var fightMode = 0;
+  var finalFight = 0;
 
   // var characterWrapper = '<div class="character"></div>';
   // var characterInner = '<div class="name">name</div><img><div class="health-points">health points</div>';
@@ -19,7 +20,8 @@ $(document).ready(function() {
     characters: {
       names: ['Cornelius', 'Dr. Zaius', 'Gen. Ursus', 'Nova'],
       namesshort: ['cornelius', 'drzaius', 'generalursus', 'nova'],
-      healthpoints: [150, 130, 170, 110]
+      healthpoints: [150, 130, 170, 110],
+      //defenderPower: [25, 10, 5, 15]
     },
     initialize: function() {
       for (i = 0; i < rpg.characters.names.length; i++) {
@@ -36,6 +38,12 @@ $(document).ready(function() {
       }
     },
     restart: function() {
+      $('#characters h3').text('Choose a Great Ape as Your Character');
+      $('#characters, #enemies, #vanquished, #defender').children('div').remove();
+      $('.sidebar, #enemies, #vanquished, #fight, #defender, #restart-button').hide();
+      myPower = 8;
+      fightMode = 0;
+      finalFight = 0;
       rpg.initialize();
     }
   };
@@ -45,7 +53,6 @@ $(document).ready(function() {
   // INITIAL CHARACTER CHOICE
   $('#characters').on('click', '.unselected', function() {
     thisData = $(this).attr('data-charactername');
-      // console.log('hasClass(\'unselected\')');
     $(this).removeClass('unselected');
     $(this).addClass('chosen');
     $(this).siblings('h3').text('Your Character');
@@ -60,11 +67,13 @@ $(document).ready(function() {
   // CHOOSING AN ENEMY FROM REMAINING
   $('#enemies').on('click', '.enemy', function() {
     if (fightMode !== 1) {
-      $('#defender .character').remove();
+      // if ($('#defender .character')) {
+      //     console.log('#defender .character');
+      // //$('#defender .character').remove();
+      // }
       $('#battle-text1').text('');
       $('#battle-text2').text('');
       defenderData = $(this).attr('data-charactername');
-        console.log(defenderData);
       defenderName = $(this).children('.name').text();
       defenderHealth = $(this).children('.health').text();
       defenderHealthNum = parseInt(defenderHealth);
@@ -75,6 +84,13 @@ $(document).ready(function() {
       $(this).addClass('defender');
       $(this).siblings('h3').text('Enemies Available to Attack');
       $(this).remove();
+      var enemiesNum = $('#enemies').children('div').length;
+      if (enemiesNum === 0) {
+        // #enemies DIV is now empty
+        $('#enemies').children('h3').text('No Enemies Remaining to Attack');
+        // set flag for last defender
+        finalFight = 1;
+      }
       $('#defender').append(this);
       $('#attack-button').removeClass('disabled');
       $('.sidebar, #fight, #defender').show('slow');
@@ -82,26 +98,34 @@ $(document).ready(function() {
     }
   });
 
-  // CLICKING ATTACK BUTTON
+  // ATTACK BUTTON
   $('#attack-button').on('click', function() {
     if (fightMode === 1) {
-      // var battleText1 = $('<div>');
-      // $(battleText1).addClass('battle-text');
       $('#battle-text1').text('You attacked ' + defenderName + ' for ' + myPower + ' damage.');
-      // var battleText2 = $('<div>');
-      // $(battleText2).addClass('battle-text');
-      $('#battle-text2').text(defenderName + ' attacked you for ' + defenderPower + ' damage.');
-      // $('#defender').append(battleText1);
-      // $('#defender').append(battleText2);
+      $('#battle-text2').text(defenderName + ' attacked you back for ' + defenderPower + ' damage.');
       defenderHealth -= myPower;
       // line below works but data attribute combined with class more complicated
       // $('.character[data-charactername="' + defenderData + '"]').children('.health').text(defenderHealth);
       if (defenderHealth <= 0) {
-        console.log('defender loses');
+        if (finalFight === 1) {
+          // final fight WON!! 
+          $('#battle-text1').html('<div id="game-message">You won!!!<br>GAME OVER!!!</div>');
+          $('#restart-button').show('fast');
+        } else {
+          // continue with fight if not final fight
+          $('.defender').children('.health').text('0');
+          $('#battle-text1').text('You have defeated ' + defenderName + '. You can chose to fight another enemy.');
+        }
+        // do after every fight
         $('.defender').children('.health').text('0');
-        $('#battle-text1').text('You have defeated ' + defenderName + '. You can chose to fight another enemy.');
         $('#battle-text2').text('');
         $('#attack-button').addClass('disabled');
+        var vanquishedDefender = $('#defender').children('div');
+        $(vanquishedDefender).removeClass('defender');
+        $(vanquishedDefender).addClass('vanquished');
+        $(vanquishedDefender).remove();
+        $('#vanquished').append(vanquishedDefender);
+        $('#vanquished').show('slow');
         fightMode = 0;
       } else {
         $('.defender').children('.health').text(defenderHealth);
@@ -109,7 +133,7 @@ $(document).ready(function() {
       myHealthNum -= defenderPower;
       if (myHealthNum <= 0) {
         $('.chosen').children('.health').text('0');
-        $('#battle-text1').text('You have been defeated. Game over.');
+        $('#battle-text1').html('<div id="game-message">You have been defeated.<br>Game over.</div>');
         $('#battle-text2').text('');
         $('#attack-button').addClass('disabled');
         $('#restart-button').show('fast');
